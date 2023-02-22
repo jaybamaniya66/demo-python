@@ -1,11 +1,11 @@
-FROM python:3
+FROM python:3.8-slim
 
-# ARG APP_HOME=/
+ARG APP_HOME=/app
 
-# ENV APP_HOME=${APP_HOME}
+ENV APP_HOME=$APP_HOME
 
-WORKDIR /
+WORKDIR $APP_HOME
 
 COPY demo.py .
 
-CMD ["python", "demo.py"]
+CMD ["python", "app.py"]
