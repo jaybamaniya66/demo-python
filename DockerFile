@@ -1,0 +1,11 @@
+FROM python:3
+
+# ARG APP_HOME=/
+
+# ENV APP_HOME=${APP_HOME}
+
+WORKDIR /
+
+COPY demo.py .
+
+CMD ["python", "demo.py"]
