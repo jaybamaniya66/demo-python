@@ -4,18 +4,18 @@ pipeline {
     stages{
         stage('test on dev'){
             steps{
-                sh 'python demo.py'
+                sh 'python3 demo.py'
             }
         }
         stage('test on stage'){
             steps{
-                sh 'python demo.py'
+                sh 'python3 demo.py'
             }
         }
 
         stage('test on prod'){
             steps{
-                sh 'python demo.py'
+                sh 'python3 demo.py'
             }
         }
     }
