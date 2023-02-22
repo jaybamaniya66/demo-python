@@ -1,5 +1,5 @@
 pipeline {
-    agent any {
+    agent any 
     
     stages{
         stage('test on dev'){
@@ -20,7 +20,7 @@ pipeline {
         }
     }
 
-    }
+    
 }
 
 
