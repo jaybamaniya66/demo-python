@@ -40,6 +40,7 @@ pipeline {
                 //     sh 'docker push ${env.DOCKER_IMAGE_NAME}'
 
                 // }
+            }
         }
         stage('provision server'){
             environment{
