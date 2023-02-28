@@ -21,9 +21,9 @@ pipeline {
             steps{
                 script{
                     echo "Building docker images"
-                    docker login -u ${env.DOCKER_USERNAME} -p ${env.DOCKER_PASSWORD} ${env.DOCKER_REGISTRY}
-                    docker build -t ${env.DOCKER_IMAGE_NAME} .
-                    docker push ${env.DOCKER_IMAGE_NAME}
+                    sh "docker login -u ${env.DOCKER_USERNAME} -p ${env.DOCKER_PASSWORD} ${env.DOCKER_REGISTRY}"
+                    sh "docker build -t ${env.DOCKER_IMAGE_NAME} . "
+                    sh "docker push ${env.DOCKER_IMAGE_NAME}"
 
                 }
             }
