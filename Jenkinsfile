@@ -21,9 +21,9 @@ pipeline {
             steps{
                 script{
                     echo "Building docker images"
-                    sh "docker login -u ${env.DOCKER_USERNAME} -p ${env.DOCKER_PASSWORD} ${env.DOCKER_REGISTRY}"
-                    sh "docker build -t ${env.DOCKER_IMAGE_NAME} . "
-                    sh "docker push ${env.DOCKER_IMAGE_NAME}"
+                    sh 'docker login -u ${env.DOCKER_USERNAME} -p ${env.DOCKER_PASSWORD} ${env.DOCKER_REGISTRY}'
+                    sh 'docker build -t ${env.DOCKER_IMAGE_NAME} . '
+                    sh 'docker push ${env.DOCKER_IMAGE_NAME}'
 
                 }
             }
@@ -39,7 +39,7 @@ pipeline {
                         sh "terrraform init"
                         sh "terraform apply -auto-approve"
                        EC2_PUBLIC_IP = sh(
-                          script:"terraform output ec2_ip",
+                          script: "terraform output ec2_ip",
                           returnStdout: true
                        ).trim()
                 }
