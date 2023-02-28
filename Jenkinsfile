@@ -3,10 +3,10 @@ pipeline {
 
     environment{
         DOCKER_REGISTRY = 'https://hub.docker.com/repository/docker/jaybamaniya/my-app/general'
-        DOCKER_USERNAME = 'jaybamaniya'
-        DOCKER_PASSWORD = 'upvision@123'
+       // DOCKER_USERNAME = 'jaybamaniya'
+       // DOCKER_PASSWORD = 'upvision@123'
         DOCKER_IMAGE_NAME = 'jaybamnaiya/my-app:jay-tf-1.0'
-        DOCKER_FILE_PATH = ''
+        //DOCKER_FILE_PATH = ''
     }
     
     stages{
@@ -19,13 +19,28 @@ pipeline {
         }
         stage('build docker image'){
             steps{
-                script{
-                    echo "Building docker images"
-                    sh 'docker login -u ${env.DOCKER_USERNAME} -p ${env.DOCKER_PASSWORD} ${env.DOCKER_REGISTRY}'
-                    sh 'docker build -t ${env.DOCKER_IMAGE_NAME} . '
-                    sh 'docker push ${env.DOCKER_IMAGE_NAME}'
-
+                {
+                // Define the Docker credentials
+                withCredentials([usernamePassword(credentialsId: 'jay-docker', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                    // Login to Docker registry
+                    sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD} ${env.DOCKER_REGISTRY}"
+                    
+                    // Build and push Docker image
+                    sh "docker build -t ${env.DOCKER_IMAGE_NAME} ."
+                    sh "docker push ${env.DOCKER_IMAGE_NAME}"
+                    
+                    // Logout of Docker registry
                 }
+
+
+
+                // script{
+                //     echo "Building docker images"
+                //     sh 'docker login -u ${env.DOCKER_USERNAME} -p ${env.DOCKER_PASSWORD} ${env.DOCKER_REGISTRY}'
+                //     sh 'docker build -t ${env.DOCKER_IMAGE_NAME} . '
+                //     sh 'docker push ${env.DOCKER_IMAGE_NAME}'
+
+                // }
             }
         }
         stage('provision server'){
