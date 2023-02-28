@@ -19,7 +19,6 @@ pipeline {
         }
         stage('build docker image'){
             steps{
-                {
                 // Define the Docker credentials
                 withCredentials([usernamePassword(credentialsId: 'jay-docker', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                     // Login to Docker registry
@@ -41,7 +40,6 @@ pipeline {
                 //     sh 'docker push ${env.DOCKER_IMAGE_NAME}'
 
                 // }
-            }
         }
         stage('provision server'){
             environment{
